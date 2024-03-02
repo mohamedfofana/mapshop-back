@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="configuration">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="include" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:attribute name="resource" use="required" />
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="property">
+					<xs:complexType>
+						<xs:attribute name="name" use="required" />
+						<xs:attribute name="value" use="required" />
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="appender">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="encoder">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="pattern" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="file" type="xs:string" />
+							<xs:element name="rollingPolicy">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="fileNamePattern" type="xs:string" />
+									</xs:sequence>
+									<xs:attribute name="class" use="required" />
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="name" use="required" />
+						<xs:attribute name="class" use="required" />
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="springProfile" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="logger" minOccurs="0">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="appender-ref">
+											<xs:complexType>
+												<xs:attribute name="ref" use="required" />
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+									<xs:attribute name="name" use="required" />
+									<xs:attribute name="level" use="required" />
+									<xs:attribute name="additivity" type="xs:boolean" use="required" />
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="root">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="appender-ref" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:attribute name="ref" use="required" />
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+									<xs:attribute name="level" use="required" />
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="name" use="required" />
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

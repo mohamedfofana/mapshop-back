@@ -1,0 +1,7 @@
+server:
+  port: 8181
+spring:
+  datasource:
+    url:  jdbc:mysql://localhost:3306/mapshop-dev
+    username: ENC(UEJk69CPeTgHUNEybZNH3UmV3dPiOzYd/Dj/kACDP/xVHYOv6PckUui2Ew+tN8/y)
+    password: ENC(o1mnJmblr4yXXQ9WgRxNT+INB45CAc9Y3LzgEvL4lpwBtMSZ8AUVmeMhRMRLXcJL)
