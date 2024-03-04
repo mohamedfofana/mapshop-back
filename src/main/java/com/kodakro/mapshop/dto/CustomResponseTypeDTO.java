@@ -5,18 +5,18 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CustomResponseType<T> {
+public class CustomResponseTypeDTO<T> {
 	private String status;
 	private T entity;
 	private String message;
 	
 	
-	public CustomResponseType(String message) {
+	public CustomResponseTypeDTO(String message) {
 		this.message = message;
 	}
 
 
-	public CustomResponseType(String status, T entity, String message) {
+	public CustomResponseTypeDTO(String status, T entity, String message) {
 		super();
 		this.status = status;
 		this.entity = entity;

@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.kodakro.mapshop.dto.Role;
+import com.kodakro.mapshop.domain.enums.Role;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
