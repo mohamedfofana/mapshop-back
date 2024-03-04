@@ -5,6 +5,6 @@ import lombok.Data;
 
 @Data
 @Builder
-public class AuthenticationFailure {
+public class AuthenticationFailureDTO {
 	private static final String message = "Login or password incorect.";
 }

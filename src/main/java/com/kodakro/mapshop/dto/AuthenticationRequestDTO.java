@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class AuthenticationRequest {
+public class AuthenticationRequestDTO {
 	  private String email;
 	  String password;
 }
