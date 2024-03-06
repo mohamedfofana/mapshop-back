@@ -4,11 +4,9 @@ import static com.kodakro.mapshop.security.helpers.JwtConstants.BEARER_TOKEN_PRE
 
 import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,12 +14,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.kodakro.mapshop.domain.Customer;
-import com.kodakro.mapshop.domain.Token;
-import com.kodakro.mapshop.domain.enums.TokenType;
-import com.kodakro.mapshop.dto.AuthenticationRequestDTO;
-import com.kodakro.mapshop.dto.AuthenticationResponseDTO;
-import com.kodakro.mapshop.dto.CustomerDTO;
+import com.kodakro.mapshop.entity.Customer;
+import com.kodakro.mapshop.entity.Token;
+import com.kodakro.mapshop.entity.dto.AuthenticationRequestDTO;
+import com.kodakro.mapshop.entity.dto.AuthenticationResponseDTO;
+import com.kodakro.mapshop.entity.dto.CustomerDTO;
+import com.kodakro.mapshop.entity.enums.TokenType;
+import com.kodakro.mapshop.entity.mapper.GlobalEntityMapper;
 import com.kodakro.mapshop.exception.ResourceAlreadyExistsException;
 import com.kodakro.mapshop.exception.ResourceNotFoundException;
 import com.kodakro.mapshop.repository.CustomerRepository;
@@ -162,6 +161,7 @@ public class CustomerServiceImpl implements CustomerService {
 	public List<CustomerDTO> findAll() {
 		var customerLists = customerRepository.findAll();
 
-		return customerLists.stream().map(customer -> modelMapper.map(customer, CustomerDTO.class)).collect(Collectors.toList());
+		return GlobalEntityMapper.mapList(customerLists, CustomerDTO.class, modelMapper);
 	}
+	
 }

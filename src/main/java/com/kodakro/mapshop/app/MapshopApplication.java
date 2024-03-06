@@ -17,7 +17,7 @@ import io.swagger.v3.oas.annotations.servers.Server;
 
 @SpringBootApplication(scanBasePackages = "com.kodakro.mapshop")
 @EnableJpaRepositories(basePackages = "com.kodakro.mapshop.repository")
-@EntityScan(basePackages="com.kodakro.mapshop.domain")
+@EntityScan(basePackages="com.kodakro.mapshop.entity")
 public class MapshopApplication {
 
 	public static void main(String[] args) {

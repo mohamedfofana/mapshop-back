@@ -1,12 +1,18 @@
-package com.kodakro.mapshop.dto;
+package com.kodakro.mapshop.entity.dto;
 
 import java.util.Date;
 
-import com.kodakro.mapshop.domain.enums.Role;
+import com.kodakro.mapshop.entity.enums.Role;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class CustomerDTO {
 	private Integer id;
 	

@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.kodakro.mapshop.domain.Token;
+import com.kodakro.mapshop.entity.Token;
 
 public interface TokenRepository extends JpaRepository<Token, Integer>{
 	@Query(value = """

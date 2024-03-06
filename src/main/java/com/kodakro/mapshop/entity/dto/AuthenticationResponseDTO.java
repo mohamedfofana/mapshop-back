@@ -1,8 +1,7 @@
-package com.kodakro.mapshop.dto;
+package com.kodakro.mapshop.entity.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,7 +11,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
 public class AuthenticationResponseDTO {
 	@JsonProperty("access_token")
 	private String accessToken;

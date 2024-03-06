@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kodakro.mapshop.dto.AuthenticationRequestDTO;
-import com.kodakro.mapshop.dto.AuthenticationResponseDTO;
-import com.kodakro.mapshop.dto.CustomerDTO;
+import com.kodakro.mapshop.entity.dto.AuthenticationRequestDTO;
+import com.kodakro.mapshop.entity.dto.AuthenticationResponseDTO;
+import com.kodakro.mapshop.entity.dto.CustomerDTO;
 import com.kodakro.mapshop.service.CustomerService;
 
 import io.swagger.v3.oas.annotations.tags.Tag;

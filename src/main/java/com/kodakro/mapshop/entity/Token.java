@@ -1,7 +1,7 @@
-package com.kodakro.mapshop.domain;
+package com.kodakro.mapshop.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.kodakro.mapshop.domain.enums.TokenType;
+import com.kodakro.mapshop.entity.enums.TokenType;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

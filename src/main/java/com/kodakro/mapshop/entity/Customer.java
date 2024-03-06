@@ -1,4 +1,4 @@
-package com.kodakro.mapshop.domain;
+package com.kodakro.mapshop.entity;
 
 
 import java.util.Collection;
@@ -11,7 +11,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.kodakro.mapshop.domain.enums.Role;
+import com.kodakro.mapshop.entity.enums.Role;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
