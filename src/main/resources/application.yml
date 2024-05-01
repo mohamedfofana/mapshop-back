@@ -21,6 +21,13 @@ application:
       expiration: 86_400_000 # a day
       refresh-token:
         expiration: 604_800_000 # 7 days
+        cookie:
+          name: mapshop-refresh-token
+          path: /api/auth/refresh-token
+      access-token:
+        cookie:
+          name: mapshop-access-token
+          path: /api
 management:
   endpoints:
     web:
@@ -29,3 +36,4 @@ management:
   endpoint:
     health:
       show-details: always
+        

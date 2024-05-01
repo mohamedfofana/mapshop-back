@@ -12,13 +12,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 
-import static com.kodakro.mapshop.security.helpers.JwtConstants.BEARER_TOKEN_PREFIX;
-
 @Service
 @RequiredArgsConstructor
 public class LogoutService implements LogoutHandler {
 
   private final TokenRepository tokenRepository;
+  private final JwtService jwtService;
 
   @Override
   public void logout(
@@ -26,18 +25,17 @@ public class LogoutService implements LogoutHandler {
       HttpServletResponse response,
       Authentication authentication
   ) {
-    final String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
     final String jwt;
-    if (authHeader == null ||!authHeader.startsWith(BEARER_TOKEN_PREFIX)) {
-      return;
-    }
-    jwt = authHeader.substring(7);
+    jwt = jwtService.getAccessTokenFromCookie(request.getCookies());
     var storedToken = tokenRepository.findByToken(jwt).orElse(null);
     if (storedToken != null) {
       storedToken.setExpired(true);
       storedToken.setRevoked(true);
       tokenRepository.save(storedToken);
       SecurityContextHolder.clearContext();
+      
+      response.addHeader(HttpHeaders.SET_COOKIE, jwtService.generateBlankAccessTokenJwtCookie().toString());
+      response.addHeader(HttpHeaders.SET_COOKIE, jwtService.generateBlankJwtRefreshCookie().toString());
     }
   }
 }

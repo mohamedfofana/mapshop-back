@@ -1,8 +1,7 @@
 package com.kodakro.mapshop.entity.dto;
 
 import java.util.Date;
-
-import com.kodakro.mapshop.entity.enums.Role;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,21 +12,21 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CustomerDTO {
+public class ReviewDTO {
 	private Integer id;
 	
-	private String firstname; 
+	private String title; 
 	
-	private String lastname; 
+	private Integer rate; 
 	
-	private Date birthdate;
+	private String comment;
 	
-	private String email; 
-	
-	private Role role;
-		
 	private Date createdAt;
 	
-	private Date updatedAt;
+	private CustomerDTO customer;
+	
+	private List<CustomerDTO> flagged;
+	
+	private List<CustomerDTO> useful;
 	
 }

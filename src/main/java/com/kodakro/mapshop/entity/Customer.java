@@ -6,10 +6,12 @@ import java.util.Date;
 import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.kodakro.mapshop.entity.enums.Role;
 
@@ -20,6 +22,9 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -43,7 +48,7 @@ public class Customer implements UserDetails{
 	
 	private String lastname; 
 	
-	private Integer age; 
+	private Date birthdate; 
 	
 	private String email; 
 	
@@ -54,11 +59,32 @@ public class Customer implements UserDetails{
 	
 	@CreationTimestamp
 	private Date createdAt;
+
+	@UpdateTimestamp
+	private Date updatedAt;
+	
 	
     @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
     @JsonManagedReference
 	private List<Token> tokens;
+    
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
+    @JsonBackReference
+	private List<Review> reviews;
 	
+    @ManyToMany(mappedBy = "likes", fetch = FetchType.LAZY)
+    @JsonBackReference
+    private List<Product> likedProducts;
+    
+    @ManyToMany(mappedBy = "flagged", fetch = FetchType.LAZY)
+    @JsonBackReference
+    private List<Review> flaggedReviews;
+    
+    @ManyToMany(mappedBy = "useful", fetch = FetchType.LAZY)
+    @JsonBackReference
+    private List<Review> usefulReviews;
+
+    
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return List.of(new SimpleGrantedAuthority(role.name()));

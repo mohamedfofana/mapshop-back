@@ -13,5 +13,30 @@
     "name": "application.security.jwt.refresh-token.expiration",
     "type": "java.lang.String",
     "description": "A description for 'application.security.jwt.refresh-token.expiration'"
+  },
+  {
+    "name": "application.security.jwt.access-token.cookie.name",
+    "type": "java.lang.String",
+    "description": "A description for 'application.security.jwt.access-token.cookie.name'"
+  },
+  {
+    "name": "application.security.jwt.refresh-token.cookie.name",
+    "type": "java.lang.String",
+    "description": "A description for 'application.security.jwt.refresh-token.cookie.name'"
+  },
+  {
+    "name": "application.security.cookie.max-age",
+    "type": "java.lang.String",
+    "description": "A description for 'application.security.cookie.max-age'"
+  },
+  {
+    "name": "application.security.jwt.access-token.cookie.path",
+    "type": "java.lang.String",
+    "description": "A description for 'application.security.jwt.access-token.cookie.path'"
+  },
+  {
+    "name": "application.security.jwt.refresh-token.cookie.path",
+    "type": "java.lang.String",
+    "description": "A description for 'application.security.jwt.refresh-token.cookie.path'"
   }
 ]}
