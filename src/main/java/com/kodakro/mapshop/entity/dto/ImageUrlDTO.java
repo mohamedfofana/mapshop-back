@@ -2,8 +2,6 @@ package com.kodakro.mapshop.entity.dto;
 
 import java.util.Date;
 
-import com.kodakro.mapshop.entity.enums.Role;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,21 +11,12 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CustomerDTO {
+public class ImageUrlDTO {
 	private Integer id;
 	
-	private String firstname; 
+	private String url; 
 	
-	private String lastname; 
-	
-	private Integer age; 
-	
-	private String email; 
-	
-	private Role role;
-		
+	private String type;  
+
 	private Date createdAt;
-	
-	private Date updatedAt;
-	
 }

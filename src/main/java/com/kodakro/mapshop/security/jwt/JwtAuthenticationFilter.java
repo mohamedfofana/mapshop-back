@@ -2,7 +2,6 @@ package com.kodakro.mapshop.security.jwt;
 
 import java.io.IOException;
 
-import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,8 +20,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 
-import static com.kodakro.mapshop.security.helpers.JwtConstants.BEARER_TOKEN_PREFIX;
-
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
@@ -38,17 +35,23 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 			@Nonnull HttpServletResponse response, 
 			@Nonnull FilterChain filterChain)
 					throws ServletException, IOException {
-		final String header = request.getHeader(HttpHeaders.AUTHORIZATION);
-		final String jwt;
 		final String customerEmail;
-
-		if(header == null || !header.startsWith(BEARER_TOKEN_PREFIX)) {
+		String jwt = null;
+		
+		if(isWhiteListedUrl(request)) {
 			filterChain.doFilter(request, response);
-
+			
 			return;
 		}
-
-		jwt = header.substring(7);
+		
+		jwt = jwtService.getAccessTokenFromCookie(request.getCookies());
+		
+		if(jwt == null) {
+			filterChain.doFilter(request, response);
+			
+			return;
+		}
+		
 		customerEmail = jwtService.extractUsername(jwt);
 	    if (customerEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 	      UserDetails userDetails = this.userDetailsService.loadUserByUsername(customerEmail);
@@ -71,6 +74,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 	    filterChain.doFilter(request, response);
 		
 
+	}
+
+	private boolean isWhiteListedUrl(HttpServletRequest request) {
+		return request.getRequestURL().toString().contains("/api/auth/") 
+				|| request.getRequestURL().toString().contains("/api/wl/");
 	}
 
 }

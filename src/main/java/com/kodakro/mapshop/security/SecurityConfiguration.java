@@ -29,7 +29,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @EnableMethodSecurity
 public class SecurityConfiguration{
-	private static final String[] WHITE_LIST_URL = {"/api/customer/auth/**",
+	private static final String[] WHITE_LIST_URL = {"/api/auth/**",
+													"/api/wl/**",
 										            "/v3/api-docs",
 										            "/v3/api-docs/**",
 										            "/swagger-resources",
@@ -56,16 +57,16 @@ public class SecurityConfiguration{
         http
         	.cors(cors -> cors.configurationSource(corsConfigurationSource()))
         	.csrf(AbstractHttpConfigurer::disable)
-            .authorizeHttpRequests(req ->
-            	req.requestMatchers(WHITE_LIST_URL).permitAll()
-                   .anyRequest()
-                   .authenticated()
-                   )
             .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
+            .authorizeHttpRequests(req ->
+	            req.requestMatchers(WHITE_LIST_URL).permitAll()
+	            .anyRequest()
+	            .authenticated()
+            )
             .authenticationProvider(authenticationProvider)
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
             .exceptionHandling(handling -> handling.accessDeniedHandler(accessDeniedHandler))
-            .logout(logout -> logout.logoutUrl("/api/customer/auth/logout")
+            .logout(logout -> logout.logoutUrl("/api/auth/logout")
             .addLogoutHandler(logoutHandler)
             .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext())
     )
